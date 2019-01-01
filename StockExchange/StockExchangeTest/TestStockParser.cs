@@ -13,66 +13,74 @@ namespace StockExchangeTest
     class TestStockParser
     {
 
-        StockParser parserTestObject = new StockParser();
+        
 
         [Test]
         public  void ReadInp()
         {
 
             string path = @"C:\Arjun\Sahaj\Test\TestInput.csv";
-            Stock sObj1 = new Stock();
-            Stock sObj2 = new Stock();
-            Stock sObj3 = new Stock();
+            FileStockParser parserTestObject = new FileStockParser(path);
+            Stock sObj1 = new Stock("1","ABC",StockSide.Buy,20);
+            Stock sObj2 = new Stock("2", "ABC", StockSide.Sell, 10);
+            Stock sObj3 = new Stock("3","XYZ",StockSide.Buy,10);
+
+            sObj1.RemQuantity = 20;
+            sObj1.Status = StockState.Open;
+
+            sObj2.RemQuantity = 10;
+            sObj2.Status = StockState.Open;
+
+            sObj3.RemQuantity = 10;
+            sObj3.Status = StockState.Open;
 
             List<Stock> testAssertParseList = new List<Stock>();
             List<Stock> testOutputParseList = new List<Stock>();
 
-            sObj1.stockId = "1";
-            sObj1.stockSide = "Buy";
-            sObj1.stockCompany = "ABC";
-            sObj1.stockQuantity = 20;
-            sObj1.stockRemQuantity = 20;
-            sObj1.stockStatus = "Open";
-
-
-            sObj2.stockId = "2";
-            sObj2.stockSide = "Sell";
-            sObj2.stockCompany = "ABC";
-            sObj2.stockQuantity = 10;
-            sObj2.stockRemQuantity = 10;
-            sObj2.stockStatus = "Open";
-
-            sObj3.stockId = "3";
-            sObj3.stockSide = "Buy";
-            sObj3.stockCompany = "XYZ";
-            sObj3.stockQuantity = 10;
-            sObj3.stockRemQuantity = 10;
-            sObj3.stockStatus = "Open";
 
             testAssertParseList.Add(sObj1);
             testAssertParseList.Add(sObj2);
             testAssertParseList.Add(sObj3);
 
-            testOutputParseList = parserTestObject.ParseStocks(path);
+            testOutputParseList = parserTestObject.Parse();
 
             CollectionAssert.AreEqual(testOutputParseList, testAssertParseList);
         }
 
         [Test]
-        public void TestNoFile()
+        public void TestNullInput()
 
         {
             string path = null;
-               List<Stock> testOutputParseList = parserTestObject.ParseStocks(path);
-            CollectionAssert.IsEmpty(testOutputParseList);
+
+            FileStockParser parserTestObject;
+
+            var ex = Assert.Throws<Exception>(() => parserTestObject = new FileStockParser(path));
+
+            Assert.That(ex.Message, Is.EqualTo("Input file can't be null"));
+
+
+
         }
 
         [Test]
-        public void WrongInputFile()
+        public void FilenotFound()
+        {
+            string path = @"C:\Arjun\Sahaj\Test\FileNotFound.csv";
+            FileStockParser parserTestObject;
+
+            var ex = Assert.Throws<Exception>(() => parserTestObject = new FileStockParser(path));
+
+            Assert.That(ex.Message, Is.EqualTo("File not found"));
+        }
+
+        [Test]
+        public void TestWrongInput()
         {
             string path = @"C:\Arjun\Sahaj\Test\TestWrongInput.csv";
-            List<Stock> testOutputParseList = parserTestObject.ParseStocks(path);
-            CollectionAssert.IsEmpty(testOutputParseList);
+            FileStockParser paseTObj = new FileStockParser(path);
+            var ex = Assert.Throws<Exception>(() => paseTObj.Parse());
+            Assert.That(ex.Message, Is.EqualTo("Invalid value for quantity"));
         }
     }
 }

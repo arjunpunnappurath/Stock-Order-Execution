@@ -13,13 +13,12 @@ namespace StockExchange
         public  void WriteOutputToTxtFile(string outFilePath, List<Stock> stockOrderList)
         {
             StringBuilder sb = new StringBuilder();
-            Stock sd = new Stock();
 
             if(!string.IsNullOrEmpty(outFilePath))
             {
                 StreamWriter strWriteLogFile = new StreamWriter(outFilePath, true);
 
-                strWriteLogFile.WriteLine(StockParser.stockHeaders);
+                strWriteLogFile.WriteLine(FileStockParser.stockHeaders);
 
                 foreach (var item in stockOrderList)
                 {
@@ -37,7 +36,7 @@ namespace StockExchange
 
         public string ToExportRows(Stock sd)
         {
-            return sd.stockId + "," + sd.stockSide + "," + sd.stockCompany + "," + sd.stockQuantity.ToString() + "," + sd.stockRemQuantity.ToString() + "," + sd.stockStatus;
+            return sd.Id + "," + sd.Company + "," +sd.Side + ","   + sd.Quantity.ToString() + "," + sd.RemQuantity.ToString() + "," + sd.Status;
         }
 
     }

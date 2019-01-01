@@ -8,81 +8,57 @@ namespace StockExchange
 {
     public class StockProcessor 
     {
-      
+
+        Dictionary<string, List<Stock>> stockState = new Dictionary<string, List<Stock>>();
+
         public  List<Stock> ProcessstockOrderList(List<Stock> stockOrderList)
         {
-
-            StockUtil stockUtil = new StockUtil();
-            if(stockOrderList.Count ==0)
+            List<Stock> existingOrders = new List<Stock>();
+            foreach (var stock in stockOrderList)
             {
-                return stockOrderList;
-            }
-            else
-            {
-                var distinctCompany = stockOrderList.Select(b => b.stockCompany).Distinct();
-                foreach (string  currCompany in distinctCompany)
+                if (stockState.TryGetValue(stock.Company,  out existingOrders))
                 {
-                    while(stockUtil.HasRecords(currCompany,stockOrderList))
+                    if (stock.Side == StockSide.Buy)
+                        existingOrders.Add(stock);
+                    else 
                     {
-                        int buyQty = 0; string buyId = "";
-                        int sellQty = 0; string sellId = "";
-                        //for (int currCount = 0; currCount < maxRecordCount; currCount++)
-                        //{                            
-                        var currBuyRecord = stockOrderList.Where(b => b.stockCompany.Trim() == currCompany && b.stockSide.Trim() == "Buy" && b.stockRemQuantity > 0).FirstOrDefault();
-                        if (currBuyRecord != null)
+                        foreach (var item in existingOrders)
                         {
-                            buyQty = currBuyRecord.stockRemQuantity;
-                            buyId = currBuyRecord.stockId;
-                        }
-
-                        var currSellRecord = stockOrderList.Where(s => s.stockCompany.Trim() == currCompany && s.stockSide.Trim() == "Sell" && s.stockRemQuantity > 0).FirstOrDefault();
-                        if (currSellRecord != null)
-                        {
-                            sellQty = currSellRecord.stockRemQuantity;
-                            sellId = currSellRecord.stockId;
-                        }
-
-                        if (buyQty > 0 && sellQty > 0)
-                        {
-                            if (buyQty >= sellQty)
+                            int buffQty;
+                           
+                            if(stock.RemQuantity > item.RemQuantity && item.Side == StockSide.Buy)
                             {
-                                buyQty = buyQty - sellQty;
-                                sellQty = 0;
+                                buffQty = stock.RemQuantity - item.RemQuantity;
+                                stock.UpdateRemainingQuantity(buffQty);
+                                item.UpdateRemainingQuantity(0);
                             }
-                            else if (sellQty >= buyQty)
+                            else if (item.RemQuantity > stock.RemQuantity && item.Side == StockSide.Buy)
                             {
-                                sellQty = sellQty - buyQty;
-                                buyQty = 0;
+                                buffQty = item.RemQuantity - stock.RemQuantity;
+                                item.UpdateRemainingQuantity(buffQty);
+                                stock.UpdateRemainingQuantity(0);
+                                break;
                             }
-
-                            stockUtil.StockBuySellUpdate(ref stockOrderList, buyId, buyQty);
-                            stockUtil.StockBuySellUpdate(ref stockOrderList, sellId, sellQty);
-
-                            /*   foreach (var buystck in stockOrderList.Where(b => (b.stockId == buyId)))
-                               {
-                                   buystck.stockRemQuantity = buyQty;
-                                   if (buyQty > 1)
-                                       buystck.stockStatus = "Open";
-                                   else
-                                       buystck.stockStatus = "Close";
-                               }
-
-                               foreach (var sellstck in stockOrderList.Where(b => (b.stockId == sellId)))
-                               {
-                                   sellstck.stockRemQuantity = sellQty;
-                                   if (sellQty > 1)
-                                       sellstck.stockStatus = "Open";
-                                   else
-                                       sellstck.stockStatus = "Close";
-
-                               }*/
+                            else if(item.RemQuantity == stock.RemQuantity && item.Side == StockSide.Buy)
+                            {
+                                buffQty = Math.Abs(stock.RemQuantity - item.RemQuantity);
+                                stock.UpdateRemainingQuantity(buffQty);
+                                item.UpdateRemainingQuantity(buffQty);
+                                break;
+                            }
+                         
                         }
                     }
-
                 }
-
-                return stockOrderList;
+                else
+                {
+                    List<Stock> stocks = new List<Stock>();
+                    stocks.Add(stock);
+                    stockState.Add(stock.Company, stocks);
+                }
             }
+            return stockOrderList;
         }
+
     }
 }

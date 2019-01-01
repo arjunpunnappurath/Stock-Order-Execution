@@ -12,16 +12,16 @@ namespace StockExchange
     {
         static void Main(string[] args)
         {
-     
-            StockParser stockParser = new StockParser();
+            string inputFilePath = ConfigurationSettings.AppSettings["inputFilePath"];
+            string ouputFilePath = ConfigurationSettings.AppSettings["outputFilePath"];
+
+            IStockParser stockParser = new FileStockParser(inputFilePath);
             StockProcessor stockProcessor = new StockProcessor();
             StockOutput stockOutput = new StockOutput();
 
-            string inputFilePath = ConfigurationSettings.AppSettings["inputFilePath"];
-            string ouputFilePath = ConfigurationSettings.AppSettings["outputFilePath"];
-            List<Stock> parsedStockOrderList = stockParser.ParseStocks(inputFilePath);
+            List<Stock> parsedStockOrderList = stockParser.Parse();
 
-            List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
+             List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
 
             stockOutput.WriteOutputToTxtFile(ouputFilePath, processedStockOrderList);
 

@@ -8,23 +8,37 @@ using System.Data;
 
 namespace StockExchange
 {
-    
-    public class StockParser : Stock
+    public interface IStockParser
     {
+        List<Stock> Parse();
+    }
+    public class FileStockParser : IStockParser
+    {
+        string inputFile = string.Empty;
+
+        public FileStockParser(string inputfile)
+        {
+            try
+            {
+                this.inputFile = inputfile;
+                if (inputFile == null)
+                    throw new Exception("Input file can't be null");
+
+                if (!File.Exists(inputFile))
+                    throw new Exception("File not found");
+            }   
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
         public static string stockHeaders = "";
-        public  List<Stock> ParseStocks (string inputStream)
+        public  List<Stock> Parse ()
         {
             List<Stock> stockOrderList = new List<Stock>();
-            
-            
-            if(inputStream == null)
-            {
-                return stockOrderList;
-            }
 
-            else
-            {
-                using (StreamReader str = new StreamReader(inputStream))
+                using (StreamReader str = new StreamReader(inputFile))
                 {
                     stockHeaders = str.ReadLine();
                     stockHeaders = stockHeaders + ",Remaining Quantity,Status";
@@ -34,20 +48,24 @@ namespace StockExchange
                         string[] rows = str.ReadLine().Split(',');
                         if(rows.Length==4)
                         {
-                            Stock objStock = new Stock();
-                            objStock.stockId = rows[0];
-                            objStock.stockSide = rows[1];
-                            objStock.stockCompany = rows[2];
-                            objStock.stockQuantity = Convert.ToInt16(rows[3]);
-                            objStock.stockRemQuantity = Convert.ToInt16(rows[3]);
-                            objStock.stockStatus = "Open";
+                        int qty = 0;
+                        if (!int.TryParse(rows[3], out qty))
+                            throw new Exception("Invalid value for quantity");
 
-                            stockOrderList.Add(objStock);
+                        StockSide side;
+                        if (rows[2] == "Buy" || rows[2] == "BUY" || rows[2] == "buy")
+                            side = StockSide.Buy;
+                        else
+                            side = StockSide.Sell;
+                        Stock stock = new Stock(rows[0],  rows[1], side, qty);
+                        stock.RemQuantity = qty;
+                        stock.Status = StockState.Open;
+                        stockOrderList.Add(stock);
                         }
                     }
                 }
                 return stockOrderList;
-            }
+            
         }
     }
 }

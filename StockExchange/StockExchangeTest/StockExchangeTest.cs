@@ -19,36 +19,45 @@ namespace UnitTest
         public void ProcessFirstCase()
         {
 
-            Stock sObj1 = new Stock();
-            Stock sObj2 = new Stock();
-            Stock sObj3 = new Stock();
+            Stock sObj1 = new Stock("1","ABC",StockSide.Buy,10);
+            Stock sObj2 = new Stock("2", "ABC", StockSide.Sell, 10);
+            Stock sObj3 = new Stock("3", "XYZ", StockSide.Buy, 10);
+
+            sObj1.RemQuantity = 10;
+            sObj1.Status = StockState.Open;
+
+            sObj2.RemQuantity = 10;
+            sObj2.Status = StockState.Open;
+
+            sObj3.RemQuantity = 10;
+            sObj3.Status = StockState.Open;
 
             StockProcessor stockProcessor = new StockProcessor();
 
             List<Stock> processimp = new List<Stock>();
 
-            sObj1.stockId = "1";
-            sObj1.stockSide = "Buy";
-            sObj1.stockCompany = "ABC";
-            sObj1.stockQuantity = 10;
-            sObj1.stockRemQuantity = 10;
-            sObj1.stockStatus = "Open";
+            //sObj1.Id = "1";
+            //sObj1.Side = "Buy";
+            //sObj1.Company = "ABC";
+            //sObj1.Quantity = 10;
+            //sObj1.RemQuantity = 10;
+            //sObj1.Status = "Open";
 
 
-            sObj2.stockId = "2";
-            sObj2.stockSide = "Sell";
-            sObj2.stockCompany = "ABC";
-            sObj2.stockQuantity = 10;
-            sObj2.stockRemQuantity = 10;
-            sObj2.stockStatus = "Open";
+            //sObj2.Id = "2";
+            //sObj2.Side = "Sell";
+            //sObj2.Company = "ABC";
+            //sObj2.Quantity = 10;
+            //sObj2.RemQuantity = 10;
+            //sObj2.Status = "Open";
 
 
-            sObj3.stockId = "3";
-            sObj3.stockSide = "Buy";
-            sObj3.stockCompany = "XYZ";
-            sObj3.stockQuantity = 10;
-            sObj3.stockRemQuantity = 10;
-            sObj3.stockStatus = "Open";
+            //sObj3.Id = "3";
+            //sObj3.Side = "Buy";
+            //sObj3.Company = "XYZ";
+            //sObj3.Quantity = 10;
+            //sObj3.RemQuantity = 10;
+            //sObj3.Status = "Open";
 
             processimp.Add(sObj1);
             processimp.Add(sObj2);
@@ -57,23 +66,30 @@ namespace UnitTest
 
 
 
-            Stock out1 = new Stock();
+            Stock out1 = new Stock("1","ABC",StockSide.Buy,10);
+            Stock out2 = new Stock("2", "ABC", StockSide.Sell, 10);
 
-            out1.stockId = "1";
-            out1.stockSide = "Buy";
-            out1.stockCompany = "ABC";
-            out1.stockQuantity = 10;
-            out1.stockRemQuantity = 0;
-            out1.stockStatus = "Close";
+            out1.RemQuantity = 0;
+            out1.Status = StockState.Close;
 
-            Stock out2 = new Stock();
+            out2.RemQuantity = 0;
+            out2.Status = StockState.Close;
 
-            out2.stockId = "2";
-            out2.stockSide = "Sell";
-            out2.stockCompany = "ABC";
-            out2.stockQuantity = 10;
-            out2.stockRemQuantity = 0;
-            out2.stockStatus = "Close";
+            //out1.Id = "1";
+            //out1.Side = "Buy";
+            //out1.Company = "ABC";
+            //out1.Quantity = 10;
+            //out1.RemQuantity = 0;
+            //out1.Status = "Close";
+
+            //Stock out2 = new Stock();
+
+            //out2.Id = "2";
+            //out2.Side = "Sell";
+            //out2.Company = "ABC";
+            //out2.Quantity = 10;
+            //out2.RemQuantity = 0;
+            //out2.Status = "Close";
 
             List<Stock> processOut = new List<Stock>();
 
@@ -90,66 +106,34 @@ namespace UnitTest
         [Test]
         public void ProessSecondCase()
         {
-                Stock sObj1 = new Stock();
-                Stock sObj2 = new Stock();
-                Stock sObj3 = new Stock();
-            
-                StockProcessor stockProcessor = new StockProcessor();
+                Stock sObj1 = new Stock("1","ABC",StockSide.Buy,10);
+                Stock sObj2 = new Stock("2","ABC",StockSide.Buy,10);
+                Stock sObj3 = new Stock("3", "XYZ", StockSide.Buy, 10);
+
+            sObj1.RemQuantity = 10;
+            sObj1.Status = StockState.Open;
+
+            sObj2.RemQuantity = 10;
+            sObj2.Status = StockState.Open;
+
+            sObj3.RemQuantity = 10;
+            sObj3.Status = StockState.Open;
+
+            StockProcessor stockProcessor = new StockProcessor();
 
                 List<Stock> processimp = new List<Stock>();
 
-                sObj1.stockId = "1";
-                sObj1.stockSide = "Buy";
-                sObj1.stockCompany = "ABC";
-                sObj1.stockQuantity = 10;
-                sObj1.stockRemQuantity = 10;
-                sObj1.stockStatus = "Open";
-
-
-                sObj2.stockId = "2";
-                sObj2.stockSide = "Buy";
-                sObj2.stockCompany = "ABC";
-                sObj2.stockQuantity = 10;
-                sObj2.stockRemQuantity = 10;
-                sObj2.stockStatus = "Open";
-
-
-                sObj3.stockId = "3";
-                sObj3.stockSide = "Buy";
-                sObj3.stockCompany = "XYZ";
-                sObj3.stockQuantity = 10;
-                sObj3.stockRemQuantity = 10;
-                sObj3.stockStatus = "Open";
-
-                processimp.Add(sObj1);
-                processimp.Add(sObj2);
-                processimp.Add(sObj3);
+            processimp.Add(sObj1);
+            processimp.Add(sObj2);
+            processimp.Add(sObj3);
 
 
 
-
-                Stock out1 = new Stock();
-
-                out1.stockId = "1";
-                out1.stockSide = "Buy";
-                out1.stockCompany = "ABC";
-                out1.stockQuantity = 10;
-                out1.stockRemQuantity = 0;
-                out1.stockStatus = "Open";
-
-                Stock out2 = new Stock();
-
-                out2.stockId = "2";
-                out2.stockSide = "Buy";
-                out2.stockCompany = "ABC";
-                out2.stockQuantity = 10;
-                out2.stockRemQuantity = 0;
-                out2.stockStatus = "Open";
 
                 List<Stock> processOut = new List<Stock>();
 
-                processOut.Add(out1);
-                processOut.Add(out2);
+                processOut.Add(sObj1);
+                processOut.Add(sObj2);
                 processOut.Add(sObj3);
 
                 List<Stock> assertOutput = new List<Stock>();
@@ -160,66 +144,33 @@ namespace UnitTest
         [Test]
         public void ProcessThirdCase()
         {
-            Stock sObj1 = new Stock();
-            Stock sObj2 = new Stock();
-            Stock sObj3 = new Stock();
+            Stock sObj1 = new Stock("1", "ABC", StockSide.Sell, 10);
+            Stock sObj2 = new Stock("2","ABC",StockSide.Sell,10);
+            Stock sObj3 = new Stock("3","XYZ",StockSide.Sell,10);
+
+
+            sObj1.RemQuantity = 10;
+            sObj1.Status = StockState.Open;
+
+            sObj2.RemQuantity = 10;
+            sObj2.Status = StockState.Open;
+
+            sObj3.RemQuantity = 10;
+            sObj3.Status = StockState.Open;
 
             StockProcessor stockProcessor = new StockProcessor();
 
             List<Stock> processimp = new List<Stock>();
 
-            sObj1.stockId = "1";
-            sObj1.stockSide = "Sell";
-            sObj1.stockCompany = "ABC";
-            sObj1.stockQuantity = 10;
-            sObj1.stockRemQuantity = 10;
-            sObj1.stockStatus = "Open";
-
-
-            sObj2.stockId = "2";
-            sObj2.stockSide = "Sell";
-            sObj2.stockCompany = "ABC";
-            sObj2.stockQuantity = 10;
-            sObj2.stockRemQuantity = 10;
-            sObj2.stockStatus = "Open";
-
-
-            sObj3.stockId = "3";
-            sObj3.stockSide = "Sell";
-            sObj3.stockCompany = "XYZ";
-            sObj3.stockQuantity = 10;
-            sObj3.stockRemQuantity = 10;
-            sObj3.stockStatus = "Open";
 
             processimp.Add(sObj1);
             processimp.Add(sObj2);
             processimp.Add(sObj3);
 
-
-
-
-            Stock out1 = new Stock();
-
-            out1.stockId = "1";
-            out1.stockSide = "Sell";
-            out1.stockCompany = "ABC";
-            out1.stockQuantity = 10;
-            out1.stockRemQuantity = 0;
-            out1.stockStatus = "Open";
-
-            Stock out2 = new Stock();
-
-            out2.stockId = "2";
-            out2.stockSide = "Sell";
-            out2.stockCompany = "ABC";
-            out2.stockQuantity = 10;
-            out2.stockRemQuantity = 0;
-            out2.stockStatus = "Open";
-
             List<Stock> processOut = new List<Stock>();
 
-            processOut.Add(out1);
-            processOut.Add(out2);
+            processOut.Add(sObj1);
+            processOut.Add(sObj2);
             processOut.Add(sObj3);
 
             List<Stock> assertOutput = new List<Stock>();
