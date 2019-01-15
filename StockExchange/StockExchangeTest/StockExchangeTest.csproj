@@ -49,10 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StockExchangeTest.cs" />
-    <Compile Include="TestStockParser.cs" />
+    <Compile Include="StockProcessorTest.cs" />
+    <Compile Include="StockParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

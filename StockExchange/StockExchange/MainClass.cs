@@ -8,7 +8,6 @@ using System.Configuration;
 namespace StockExchange
 {
      class MainClass
-
     {
         static void Main(string[] args)
         {
@@ -18,13 +17,9 @@ namespace StockExchange
             IStockParser stockParser = new FileStockParser(inputFilePath);
             StockProcessor stockProcessor = new StockProcessor();
             StockOutput stockOutput = new StockOutput();
-
             List<Stock> parsedStockOrderList = stockParser.Parse();
-
              List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
-
             stockOutput.WriteOutputToTxtFile(ouputFilePath, processedStockOrderList);
-
             Console.Read();
         }
     }

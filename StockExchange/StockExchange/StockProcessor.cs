@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace StockExchange
 {
+    /// <summary>
+    /// The class which contains methods that are responsible for processing the input list.
+    /// </summary>
     public class StockProcessor 
     {
-
         Dictionary<string, List<Stock>> stockState = new Dictionary<string, List<Stock>>();
-
+        //Function to process the input list.
         public  List<Stock> ProcessstockOrderList(List<Stock> stockOrderList)
         {
             List<Stock> existingOrders = new List<Stock>();

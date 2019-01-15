@@ -7,15 +7,18 @@ using System.IO;
 using System.Data;
 
 namespace StockExchange
-{
+{   //Interface used to declare the funtion that is used to read an input to the parser. 
     public interface IStockParser
     {
         List<Stock> Parse();
     }
+    /// <summary>
+    /// The parser class that is primarily responsible for the reading aspect of the program where it consumes a .csv file and loads the data
+    /// to a list of "Stock" datatype.
+    /// </summary>
     public class FileStockParser : IStockParser
     {
         string inputFile = string.Empty;
-
         public FileStockParser(string inputfile)
         {
             try
@@ -32,8 +35,8 @@ namespace StockExchange
                 throw ex;
             }
         }
-        
         public static string stockHeaders = "";
+        //Function to parse the input file.
         public  List<Stock> Parse ()
         {
             List<Stock> stockOrderList = new List<Stock>();
@@ -64,8 +67,7 @@ namespace StockExchange
                         }
                     }
                 }
-                return stockOrderList;
-            
+                return stockOrderList; 
         }
     }
 }

@@ -8,6 +8,10 @@ namespace StockExchange
 {
     public enum StockSide {Buy,Sell};
     public enum StockState { Open, Close};
+    /// <summary>
+    /// This class is the blue print of the stock module. This class contains the necessary variables and also assocated functions 
+    /// that are essential for the processing.-
+    /// </summary>
     public class Stock
     {
         public string Id { get; private set; }
@@ -17,7 +21,6 @@ namespace StockExchange
         public int RemQuantity { get;set; }
         public StockState Status { get;set; }
 
-     
         public Stock(string id,   string company, StockSide side, int qty)
         {
             this.Id = id;
@@ -25,7 +28,7 @@ namespace StockExchange
             this.Company = company;
             this.Quantity = qty;
         }
-                                                         
+        //Function to update the status of a transaction with respect to the remaining quantity it contains.                                                 
         public void UpdateRemainingQuantity(int qty)
         {
             this.RemQuantity = qty;
