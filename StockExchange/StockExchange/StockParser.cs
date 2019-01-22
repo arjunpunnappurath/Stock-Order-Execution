@@ -21,19 +21,12 @@ namespace StockExchange
         string inputFile = string.Empty;
         public FileStockParser(string inputfile)
         {
-            try
-            {
                 this.inputFile = inputfile;
                 if (inputFile == null)
                     throw new Exception("Input file can't be null");
 
                 if (!File.Exists(inputFile))
                     throw new Exception("File not found");
-            }   
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
         public static string stockHeaders = "";
         //Function to parse the input file.
@@ -45,7 +38,7 @@ namespace StockExchange
                 {
                     stockHeaders = str.ReadLine();
                     stockHeaders = stockHeaders + ",Remaining Quantity,Status";
-                    
+
                     while(!str.EndOfStream)
                     {
                         string[] rows = str.ReadLine().Split(',');
@@ -56,7 +49,7 @@ namespace StockExchange
                             throw new Exception("Invalid value for quantity");
 
                         StockSide side;
-                        if (rows[2] == "Buy" || rows[2] == "BUY" || rows[2] == "buy")
+                        if(rows[2].ToLower() == "buy")
                             side = StockSide.Buy;
                         else
                             side = StockSide.Sell;

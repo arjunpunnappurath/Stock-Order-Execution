@@ -9,8 +9,7 @@ namespace StockExchange
     public enum StockSide {Buy,Sell};
     public enum StockState { Open, Close};
     /// <summary>
-    /// This class is the blue print of the stock module. This class contains the necessary variables and also assocated functions 
-    /// that are essential for the processing.-
+    /// Stock class represents each item in the input and tracks quantity and state
     /// </summary>
     public class Stock
     {

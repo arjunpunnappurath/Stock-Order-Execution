@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="MainClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StockOutput.cs" />
+    <Compile Include="StockOutputFileWriter.cs" />
     <Compile Include="StockParser.cs" />
     <Compile Include="StockProcessor.cs" />
     <Compile Include="Stock.cs" />

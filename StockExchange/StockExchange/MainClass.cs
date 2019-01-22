@@ -16,10 +16,10 @@ namespace StockExchange
 
             IStockParser stockParser = new FileStockParser(inputFilePath);
             StockProcessor stockProcessor = new StockProcessor();
-            StockOutput stockOutput = new StockOutput();
+            StockOutputFileWriter stockOutput = new StockOutputFileWriter();
             List<Stock> parsedStockOrderList = stockParser.Parse();
              List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
-            stockOutput.WriteOutputToTxtFile(ouputFilePath, processedStockOrderList);
+            stockOutput.Write(ouputFilePath, processedStockOrderList);
             Console.Read();
         }
     }

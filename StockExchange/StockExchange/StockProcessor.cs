@@ -12,7 +12,6 @@ namespace StockExchange
     public class StockProcessor 
     {
         Dictionary<string, List<Stock>> stockState = new Dictionary<string, List<Stock>>();
-        //Function to process the input list.
         public  List<Stock> ProcessstockOrderList(List<Stock> stockOrderList)
         {
             List<Stock> existingOrders = new List<Stock>();
@@ -27,7 +26,6 @@ namespace StockExchange
                         foreach (var item in existingOrders)
                         {
                             int buffQty;
-                           
                             if(stock.RemQuantity > item.RemQuantity && item.Side == StockSide.Buy)
                             {
                                 buffQty = stock.RemQuantity - item.RemQuantity;
