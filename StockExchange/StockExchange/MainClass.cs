@@ -19,7 +19,7 @@ namespace StockExchange
             StockOutputFileWriter stockOutput = new StockOutputFileWriter();
             List<Stock> parsedStockOrderList = stockParser.Parse();
              List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
-            stockOutput.Write(ouputFilePath, processedStockOrderList);
+            stockOutput.Write( processedStockOrderList);
             Console.Read();
         }
     }

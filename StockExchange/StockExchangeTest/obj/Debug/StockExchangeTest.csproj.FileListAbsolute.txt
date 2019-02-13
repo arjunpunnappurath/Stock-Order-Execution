@@ -77,6 +77,7 @@ E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\
 E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\StockExchangeTest\bin\Debug\nunit.engine.dll
 E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\StockExchangeTest\bin\Debug\nunit.engine.api.dll
 E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\StockExchangeTest\bin\Debug\Mono.Cecil.dll
+E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\StockExchangeTest\bin\Debug\SOES - Input.csv
 E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\StockExchangeTest\bin\Debug\StockExchangeTest.dll.config
 E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\StockExchangeTest\bin\Debug\StockExchangeTest.dll
 E:\Code\Stock-Order-Execution-master\Stock-Order-Execution-master\StockExchange\StockExchangeTest\bin\Debug\StockExchangeTest.pdb

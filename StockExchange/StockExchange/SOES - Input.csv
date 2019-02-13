@@ -1,0 +1,8 @@
+StockId,Company,Side,Quantity
+1,ABC,BUY,10
+2,ABC,BUY,5
+3,XYZ,BUY,10
+4,ABC,SELL,10
+5,XYZ,SELL,5
+6,XYZ,SELL,5
+7,ABC,SELL,5
