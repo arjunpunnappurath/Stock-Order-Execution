@@ -9,12 +9,10 @@ using System.IO;
 using System.Configuration;
 
 namespace StockExchangeTest
-{/// <summary>
-/// Class that is in place to test the Parser logic in the project. 
-/// </summary>
+{
     [TestFixture]
     class StockParserTest
-    {   //Test function to read an input form a file and assert it with the expected data set.
+    {  
         [Test]
         public  void ReadInp()
         {
@@ -37,7 +35,6 @@ namespace StockExchangeTest
             testOutputParseList = parserTestObject.Parse();
             CollectionAssert.AreEqual(testOutputParseList, testAssertParseList);
         }
-        //Test function to try and assert whether an error is prompted or not when we try to read a file when the path parameter is absent.
         [Test]
         public void TestNullInput()
         {
@@ -46,7 +43,6 @@ namespace StockExchangeTest
             var ex = Assert.Throws<Exception>(() => parserTestObject = new FileStockParser(path));
             Assert.That(ex.Message, Is.EqualTo("Input file can't be null"));
         } 
-        //Test function to assert whether an error is prompted when try to read a file that is not found in the given path.
         [Test]
         public void FilenotFound()
         {
@@ -55,7 +51,6 @@ namespace StockExchangeTest
             var ex = Assert.Throws<Exception>(() => parserTestObject = new FileStockParser(path));
             Assert.That(ex.Message, Is.EqualTo("File not found"));
         }
-        //Test function to assert whether a correct error is prompted or not when we try to read a file with wrong input in it.
         [Test]
         public void TestWrongInput()
         {

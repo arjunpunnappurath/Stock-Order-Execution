@@ -36,7 +36,7 @@ namespace StockExchange
             return sd.Id + "," + sd.Company + "," +sd.Side + ","   + sd.Quantity.ToString() + "," + sd.RemQuantity.ToString() + "," + sd.Status;
         }
         //Method to get the outfile name and path
-        public string OutFilePath()
+         string OutFilePath()
         {
             string fileName = Path.GetTempFileName();
             return fileName;
