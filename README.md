@@ -5,8 +5,7 @@ and writes an output file.
 
 How to run the code:
 
-Please create a folder structure that is similar to the one that is found in the apps config of the code 
-and past the input file. Also create the respective folder structure for the output file to be delivered and run the code.
+Open the solution and preass F5 to start. We have added the input file to the project and the output file will be generated in the temp folder of the system.
 
 Class Design
 
