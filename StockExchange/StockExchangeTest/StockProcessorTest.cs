@@ -32,9 +32,9 @@ namespace UnitTest
             Stock out1 = new Stock("1","ABC",StockSide.Buy,10);
             Stock out2 = new Stock("2", "ABC", StockSide.Sell, 10);
             out1.RemQuantity = 0;
-            out1.Status = StockState.Close;
+            out1.Status = StockState.Closed;
             out2.RemQuantity = 0;
-            out2.Status = StockState.Close;
+            out2.Status = StockState.Closed;
             List<Stock> processOut = new List<Stock>();
             processOut.Add(out1);
             processOut.Add(out2);
