@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Data;
 
 namespace StockExchange
-{   //Interface used to declare the funtion that is used to read an input to the parser. 
+{
+    //Interface used to declare the funtion that is used to read an input to the parser. 
     public interface IStockParser
     {
         List<Stock> Parse();
     }
+
     /// <summary>
     /// The parser class that is primarily responsible for the reading aspect of the program where it consumes a .csv file and loads the data
     /// to a list of "Stock" datatype.
@@ -19,48 +17,51 @@ namespace StockExchange
     public class FileStockParser : IStockParser
     {
         string inputFile = string.Empty;
-        public FileStockParser(string inputfile)
-        {
-                this.inputFile = inputfile;
-                if (inputFile == null)
-                    throw new Exception("Input file can't be null");
 
-                if (!File.Exists(inputFile))
-                    throw new Exception("File not found");
+        public FileStockParser(string inputFile)
+        {
+            if (inputFile == null)
+                throw new Exception("Input file can't be null");
+
+            if (!File.Exists(inputFile))
+                throw new Exception("File not found");
+
+            this.inputFile = inputFile;
         }
-        public static string stockHeaders = "";
+
         //Function to parse the input file.
-        public  List<Stock> Parse ()
+        public List<Stock> Parse()
         {
             List<Stock> stockOrderList = new List<Stock>();
+            var lines = File.ReadAllLines(inputFile);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var isHeader = i == 0;
+                if (isHeader)
+                    continue;
 
-                using (StreamReader str = new StreamReader(inputFile))
-                {
-                    stockHeaders = str.ReadLine();
-                    stockHeaders = stockHeaders + ",Remaining Quantity,Status";
+                var stock = ParseStock(lines[i]);
+                if (stock != null)
+                    stockOrderList.Add(stock);
+            }
 
-                    while(!str.EndOfStream)
-                    {
-                        string[] rows = str.ReadLine().Split(',');
-                        if(rows.Length==4)
-                        {
-                        int qty = 0;
-                        if (!int.TryParse(rows[3], out qty))
-                            throw new Exception("Invalid value for quantity");
+            return stockOrderList;
+        }
 
-                        StockSide side;
-                        if(rows[2].ToLower() == "buy")
-                            side = StockSide.Buy;
-                        else
-                            side = StockSide.Sell;
-                        Stock stock = new Stock(rows[0],  rows[1], side, qty);
-                        stock.RemQuantity = qty;
-                        stock.Status = StockState.Open;
-                        stockOrderList.Add(stock);
-                        }
-                    }
-                }
-                return stockOrderList; 
+        private Stock ParseStock(string line)
+        {
+            string[] rows = line.Split(',');
+            if (rows.Length != 4)
+                return null;
+
+            if (!int.TryParse(rows[3], out int qty))
+                throw new Exception("Invalid value for quantity");
+
+            StockSide side = StockSide.Sell;
+            if (rows[2].ToLower() == "buy")
+                side = StockSide.Buy;
+            
+            return new Stock(rows[0], rows[1], side, qty);
         }
     }
 }

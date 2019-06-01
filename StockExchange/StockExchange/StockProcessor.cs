@@ -22,7 +22,7 @@ namespace StockExchange
                 }
                 else if (stock.Side == StockSide.Sell)
                 {
-                    processSellingIn(existingOrders, stock);
+                    ProcessSellingIn(existingOrders, stock);
                 }
             }
             return stockOrderList;
@@ -40,7 +40,7 @@ namespace StockExchange
             return null;
         }
 
-        private void processSellingIn(List<Stock> existingOrders, Stock currentStock)
+        private void ProcessSellingIn(List<Stock> existingOrders, Stock currentStock)
         {
             foreach (var existingStock in existingOrders)
             {

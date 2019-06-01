@@ -12,7 +12,6 @@ namespace StockExchange
         static void Main(string[] args)
         {
             string inputFilePath = ConfigurationSettings.AppSettings["inputFilePath"];
-            string ouputFilePath = ConfigurationSettings.AppSettings["outputFilePath"];
 
             IStockParser stockParser = new FileStockParser(inputFilePath);
             StockProcessor stockProcessor = new StockProcessor();
@@ -20,6 +19,7 @@ namespace StockExchange
             List<Stock> parsedStockOrderList = stockParser.Parse();
              List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
             stockOutput.Write( processedStockOrderList);
+            Console.WriteLine("Outputfile Created successfully");
             Console.Read();
         }
     }

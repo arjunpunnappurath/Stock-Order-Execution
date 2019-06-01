@@ -27,7 +27,10 @@ namespace StockExchange
             this.Side = side;
             this.Company = company;
             this.Quantity = qty;
+            this.RemQuantity = qty;
+            this.Status = StockState.Open;
         }
+
         //Function to update the status of a transaction with respect to the remaining quantity it contains.                                                 
         public void UpdateRemainingQuantity(int qty)
         {

@@ -11,7 +11,10 @@ namespace StockExchange
 /// Class that contains the method to write the output txt file.
 /// </summary>
     class StockOutputFileWriter
-    {    //Method to write the output file.
+    {
+        private string headers = "StockId,Company,Side,Quantity,Remaining Quantity,Status";
+
+        //Method to write the output file.
         public  void Write( List<Stock> stockOrderList)
         {
             string outFilePath = OutFilePath();
@@ -19,15 +22,13 @@ namespace StockExchange
             if(!string.IsNullOrEmpty(outFilePath))
             {
                 StreamWriter strWriteLogFile = new StreamWriter(outFilePath, true);
-                strWriteLogFile.WriteLine(FileStockParser.stockHeaders);
+                strWriteLogFile.WriteLine(headers);
                 foreach (var item in stockOrderList)
                 {
                     strWriteLogFile.WriteLine(ToExportRows(item));
                 }
                 strWriteLogFile.Flush();
                 strWriteLogFile.Close();
-                Console.WriteLine("Output File Creation Successful");
-                Console.Read();
             }
         }
         //Method to export the rows from the stock object for writing to the file.
