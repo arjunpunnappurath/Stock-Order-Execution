@@ -5,7 +5,7 @@ and writes an output file.
 
 How to run the code:
 
-Open the solution and preass F5 to start. We have added the input file to the project and the output file will be generated in the temp folder of the system.
+Open the solution and preass F5 to start. The input file to the project and the output file will be generated in the temp folder of the system.
 
 Class Design
 
