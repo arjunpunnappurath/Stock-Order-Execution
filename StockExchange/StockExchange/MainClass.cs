@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace StockExchange
 {
-     class MainClass
+    class MainClass
     {
         static void Main(string[] args)
         {
@@ -17,8 +17,8 @@ namespace StockExchange
             StockProcessor stockProcessor = new StockProcessor();
             StockOutputFileWriter stockOutput = new StockOutputFileWriter();
             List<Stock> parsedStockOrderList = stockParser.Parse();
-             List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
-            stockOutput.Write( processedStockOrderList);
+            List<Stock> processedStockOrderList = stockProcessor.ProcessstockOrderList(parsedStockOrderList);
+            stockOutput.Write(processedStockOrderList);
             Console.WriteLine("Outputfile Created successfully");
             Console.Read();
         }

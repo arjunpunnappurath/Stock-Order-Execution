@@ -60,7 +60,7 @@ namespace StockExchange
             StockSide side = StockSide.Sell;
             if (rows[2].ToLower() == "buy")
                 side = StockSide.Buy;
-            
+
             return new Stock(rows[0], rows[1], side, qty);
         }
     }

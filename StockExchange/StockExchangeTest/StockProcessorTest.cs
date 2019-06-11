@@ -15,7 +15,7 @@ namespace UnitTest
         [Test]
         public void ProcessBuyandSell()
         {
-            Stock sObj1 = new Stock("1","ABC",StockSide.Buy,10);
+            Stock sObj1 = new Stock("1", "ABC", StockSide.Buy, 10);
             Stock sObj2 = new Stock("2", "ABC", StockSide.Sell, 10);
             Stock sObj3 = new Stock("3", "XYZ", StockSide.Buy, 10);
             sObj1.RemQuantity = 10;
@@ -29,7 +29,7 @@ namespace UnitTest
             processimp.Add(sObj1);
             processimp.Add(sObj2);
             processimp.Add(sObj3);
-            Stock out1 = new Stock("1","ABC",StockSide.Buy,10);
+            Stock out1 = new Stock("1", "ABC", StockSide.Buy, 10);
             Stock out2 = new Stock("2", "ABC", StockSide.Sell, 10);
             out1.RemQuantity = 0;
             out1.Status = StockState.Closed;
@@ -47,8 +47,8 @@ namespace UnitTest
         [Test]
         public void ProessOnlyBuy()
         {
-            Stock sObj1 = new Stock("1","ABC",StockSide.Buy,10);
-            Stock sObj2 = new Stock("2","ABC",StockSide.Buy,10);
+            Stock sObj1 = new Stock("1", "ABC", StockSide.Buy, 10);
+            Stock sObj2 = new Stock("2", "ABC", StockSide.Buy, 10);
             Stock sObj3 = new Stock("3", "XYZ", StockSide.Buy, 10);
             sObj1.RemQuantity = 10;
             sObj1.Status = StockState.Open;
@@ -73,8 +73,8 @@ namespace UnitTest
         public void ProcessOnlySell()
         {
             Stock sObj1 = new Stock("1", "ABC", StockSide.Sell, 10);
-            Stock sObj2 = new Stock("2","ABC",StockSide.Sell,10);
-            Stock sObj3 = new Stock("3","XYZ",StockSide.Sell,10);
+            Stock sObj2 = new Stock("2", "ABC", StockSide.Sell, 10);
+            Stock sObj3 = new Stock("3", "XYZ", StockSide.Sell, 10);
             sObj1.RemQuantity = 10;
             sObj1.Status = StockState.Open;
             sObj2.RemQuantity = 10;

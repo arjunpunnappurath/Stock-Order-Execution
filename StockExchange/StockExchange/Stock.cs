@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace StockExchange
 {
-    public enum StockSide {Buy,Sell};
-    public enum StockState { Open, Closed};
+    public enum StockSide { Buy, Sell };
+    public enum StockState { Open, Closed };
     /// <summary>
     /// Stock class represents each item in the input and tracks quantity and state
     /// </summary>
@@ -17,11 +17,11 @@ namespace StockExchange
         public StockSide Side { get; private set; }
         public string Company { get; private set; }
         public int Quantity { get; private set; }
-        public int RemQuantity { get;set; }
-        public StockState Status { get;set; }
+        public int RemQuantity { get; set; }
+        public StockState Status { get; set; }
         public bool IsClosed { get { return Status == StockState.Closed; } }
 
-        public Stock(string id,   string company, StockSide side, int qty)
+        public Stock(string id, string company, StockSide side, int qty)
         {
             this.Id = id;
             this.Side = side;
